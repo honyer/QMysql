@@ -37,6 +37,10 @@ void Widget::on_pbtnQtPath_clicked()
         ui->letQtPath->setText(path);
 
         QDir dir(path + "\\Tools");
+        if(!dir.exists()){
+            return;
+        }
+
         dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
         QStringList strlist = dir.entryList();
 
@@ -255,7 +259,7 @@ bool Widget::generateScriptText()
         script += "ninja\nninja install\n";
         script += "call " + qvb + "\\bin\\qt-cmake.bat -G \"Ninja\"" + buildpama
                   + "  -DCMAKE_BUILD_TYPE=Release\n";
-        script += "ninja\nninja install";
+        script += "ninja\nninja install\n";
     } else {
         script += mingw_path + "\\bin\n";
         script += "cd " + srcpath;
