@@ -291,11 +291,13 @@ void Widget::on_pbtnGenerateScript_clicked()
     if (generateScriptText()) {
         ui->lableNotify->setStyleSheet("color: green;");
         ui->lableNotify->setText("生成成功！");
+        ui->pbtnSaveText->setEnabled(true);
         return;
     }
 
     ui->lableNotify->setStyleSheet("color: red;");
     ui->lableNotify->setText("请检查各项路径");
+    ui->pbtnSaveText->setEnabled(false);
     loadAbout();
 }
 
